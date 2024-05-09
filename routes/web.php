@@ -31,6 +31,9 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/login', [AdminLoginController::class, 'login'])->name('admin.login');
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
+        Route::get('/forgot-password', function () {
+            return view('admin.forgot_password');
+        })->middleware('guest')->name('admin.forgot_password');
     });
     Route::group(['middleware' => 'admin.auth'], function () {
 
@@ -83,6 +86,7 @@ Route::get('survey/{id}/edit', [SurveyController::class, 'edit'])->name('admin.S
 Route::get('/question/edit/{id}', [HomeController::class, 'editQuestion'])->name('admin.home.edit');
 Route::put('/question/{id}', [HomeController::class, 'updateQuestion'])->name('admin.update');
 Route::delete('/questions/{id}', [HomeController::class, 'deleteSurvey'])->name('admin.home.delete');
+Route::post('/send-survey', [HomeController::class, 'sendSurvey'])->name('admin.home.send_survey');
 
 
 //front servey routes

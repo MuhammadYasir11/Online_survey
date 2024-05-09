@@ -1,28 +1,27 @@
 @extends('admin/layouts.app')
 @section('content')
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="card">
-            <div class="card-body">
-                <div class="container-fluid my-2">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Create Category</h1>
-                        </div>
-                        <div class="col-sm-6 text-right">
-                            <a href="{{ route('admin.Category.list') }}" class="btn btn-primary">View List</a>
+    <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Create Category</h4>
+                                <div class="col-sm-10 text-right">
+                                    <a href="{{ route('admin.Category.list') }}" class="btn btn-primary">View List</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="container-fluid">
+        </section>
+        <section class="section">
             <form action="" method="post" id="categoryForm" name="categoryForm">
                 <div class="card">
                     <div class="card-body">
@@ -38,7 +37,7 @@
 
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="slug">Category Title</label>
+                                    <label for="title">Category Title</label>
                                     <select name="title" id="title" class="form-control">
                                         <option value="0">--Select Category--</option>
                                         <option value="Customer Feedback">Customer Feedback</option>
@@ -48,26 +47,19 @@
                                         <option value="Student Feedback">Student Feedback</option>
                                         <option value="Parents Feedback">Parents Feedback</option>
                                         <option value="Teacher Feedback">Teacher Feedback</option>
-
-
                                     </select>
                                     <p></p>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
-                </div>
-                <div class="pb-5 pt-3">
-                    <button type="submit" class="btn btn-primary">Create</button>
-                    <a href="#" class="btn btn-outline-dark ml-3">Cancel</a>
+                    <div class="card-footer text-right">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
                 </div>
             </form>
-        </div>
-        <!-- /.card -->
-    </section>
-    <!-- /.content -->
+        </section>
+    </div>
 @endsection
 
 @section('customJs')

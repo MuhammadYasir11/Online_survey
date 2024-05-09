@@ -34,4 +34,7 @@ class AdminLoginController extends Controller
                 ->withInput($request->only('email'));
         }
     }
+    public function forgett() {
+        return view('admin.forgot_password');
+    }
 }

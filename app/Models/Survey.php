@@ -11,8 +11,10 @@ class Survey extends Model
     use HasFactory;
 
     protected $table = 'survey';
-    protected $fillable = ['survey_title'];
-
+    protected $fillable = [
+        'survey_title',
+        'Publish_type'
+    ];
 
     public function category()
     {
@@ -38,5 +40,4 @@ class Survey extends Model
     {
         return $this->belongsToMany(User::class, 'survey_user', 'survey_id', 'user_id')->where('role', 2);
     }
-
 }

@@ -1,66 +1,96 @@
 @extends('admin/layouts.app')
-
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
+    <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="col-sm-12 text-right">
+                                    <button type="button" class="btn btn-secondary mr-2"
+                                        onclick="window.location.href='{{ route('admin.Question.create', ['survey' => $id]) }}'">Edit
+                                        Design</button>
+                                    <button type="button" class="btn btn-info"
+                                        onclick="window.location.href='{{ route('admin.Survey.edit', ['id' => $id]) }}'">Edit
+                                        Survey</button>
+                                </div>                
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ $surveyTitle }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-6">
                     <div class="card">
-                        <div class="card-body">
-                            <h1>{{ $surveyTitle }}</h1>
+                        <div class="card-statistic-4">
+                            <div class="align-items-center justify-content-between">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                        <div class="card-content">
+                                            <h5 class="font-15">Total Response</h5>
+                                            <h2 class="mb-3 font-18">6</h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                        <div class="banner-img">
+                                          <img src="{{ asset('admin-assets/img/banner/2.png') }}" alt="">
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-sm-12 text-right">
-                    <button type="button" class="btn btn-secondary mr-2"
-                        onclick="window.location.href='{{ route('admin.Question.create', ['survey' => $id]) }}'">Edit
-                        Design</button>
-                    <button type="button" class="btn btn-info"
-                        onclick="window.location.href='{{ route('admin.Survey.edit', ['id' => $id]) }}'">Edit
-                        Survey</button>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-statistic-4">
+                            <div class="align-items-center justify-content-between">
+                                <div class="row ">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                        <div class="card-content">
+                                            <h5 class="font-15">Draft</h5>
+                                            <h2 class="mb-3 font-18">3</h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                        <div class="banner-img">
+                                          <img src="{{ asset('admin-assets/img/banner/3.png') }}" alt="">
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
-
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="inner">
-                                <h3>0</h3>
-                                <p>TOTAL RESPONSES</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="#" class="small-box-footer text-dark">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
-                        </div>
+                <div class="col-12 col-sm-12 col-lg-12">
+                  <div class="card ">
+                    <div class="card-header">
+                      <h4>Chart</h4>
+                      <div class="card-header-action">
+                      </div>
                     </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div id="chart1"></div>
+                          <div class="row mb-0">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
 
-                <div class="col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="inner">
-                                <h3>Draft</h3>
-                                <p>OVERALL SURVEY STATUS</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
-                            </div>
-                            <a href="{{ route('admin.home.list') }}" class="small-box-footer text-dark">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -118,6 +148,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @elseif ($question->question_type === 'customRange')
+                                        <div class="row mt-2">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    @foreach ($min,$max,$mid->where('question_id', $question->id) as $min,$max,$mid)
+                                                        <div class="col-md-6 mb-2">
+                                                            <div class="form-check">
+                                                                <input type="range" class="form-control" min="$min" max="$max" mid="$mid">
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endif
                                 </div>
                             @endforeach
@@ -125,20 +169,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 @endsection
 
-@section('customerCss')
-    <style>
-        .option-font {
-            font-family: 'National2', sans-serif;
-        }
-    </style>
-@endsection
 
 @section('customerJs')
-    <script>
-        console.log("Hello");
-    </script>
 @endsection

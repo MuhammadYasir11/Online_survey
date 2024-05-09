@@ -111,4 +111,13 @@ class HomeController extends Controller
         $survey->delete();
         return redirect()->route('admin.index')->with('success', 'Survey deleted successfully');
     }
+
+    public function sendSurvey($surveyId)
+    {
+        $survey = Survey::find($surveyId);
+        $survey->Publish_type = true;
+
+        return redirect()->route('admin.home.list')->with('success', 'Survey published successfully');
+    
+    }
 }
